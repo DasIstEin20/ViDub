@@ -30,6 +30,19 @@ from pydub import AudioSegment
 import shutil
 import subprocess
 import torch
+
+# Verify Torch and CUDA versions
+_required_cuda = "12.6"
+_required_torch = (2, 7, 1)
+if torch.version.cuda and not torch.version.cuda.startswith(_required_cuda):
+    raise EnvironmentError(
+        f"ViDubb requires CUDA {_required_cuda} but found {torch.version.cuda}."
+    )
+installed = tuple(map(int, torch.__version__.split("+", 1)[0].split(".")))
+if installed < _required_torch:
+    raise EnvironmentError(
+        f"ViDubb requires PyTorch >= 2.7.1 but found {torch.__version__}."
+    )
 from speechbrain.inference.interfaces import foreign_class
 from deepface import DeepFace
 import numpy as np
@@ -669,7 +682,7 @@ class VideoDubbing:
 
             shutil.move(source_path, destination_folder)
 	
-        os.system('pip install -r requirements.txt > /dev/null 2>&1')	
+        os.system('pip install -r requirements_cuda126.txt > /dev/null 2>&1')
 
 def main():
 	os.system("rm video_path.mp4")

@@ -184,16 +184,16 @@ Before starting, ensure you have [Anaconda](https://docs.anaconda.com/anaconda/i
     sudo apt-get install ffmpeg
     ```
 
-2. **Install Python dependencies** from the `requirements.txt` file:
-    ```bash
-    pip install -r requirements.txt
-    ```
+2. **Install Python dependencies** from the `requirements_cuda126.txt` file:
+```bash
+pip install -r requirements_cuda126.txt
+```
 
 ### 5) Configure CUDA for GPU Acceleration
-1. **Install PyTorch with CUDA support** for GPU acceleration:
-    ```bash
-    pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-    ```
+1. **Install PyTorch 2.7.1 with CUDA 12.6 support** for GPU acceleration:
+```bash
+pip3 install torch==2.7.1+cu126 torchvision==0.18.1+cu126 torchaudio==2.2.1+cu126 --index-url https://download.pytorch.org/whl/cu126
+```
 
 2. **Check if CUDA is available**:
     Open a Python shell and run the following:
