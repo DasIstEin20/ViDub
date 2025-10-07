@@ -1,0 +1,4 @@
+2024-11-01 12:00:00 | INFO | Starting ViDub pipeline sample log
+2024-11-01 12:00:01 | INFO | Running pre-flight checks...
+2024-11-01 12:00:02 | INFO | Using embedded subtitle stream 0
+2024-11-01 12:00:05 | INFO | Subtitle-aware preprocessing complete.

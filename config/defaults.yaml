@@ -1,0 +1,16 @@
+# Default configuration for ViDub one-click pipeline
+input_video: ""
+output_dir: "results"
+source_language: "en"
+target_language: "en"
+whisper_model: "medium"
+LipSync: true
+Bg_sound: false
+subs_file: ""
+use_embedded_subs: false
+preferred_subs_index: 0
+subs_lang: ""
+skip_translation_if_lang_matches: true
+force_stt: false
+use_diarization_with_subs: false
+log: false

@@ -52,3 +52,6 @@ gradio==5.8.0
 faster-whisper==1.1.1
 transformers==4.46.3
 librosa==0.10.2.post1
+pysubs2==1.7.3
+langdetect==1.0.9
+PyYAML==6.0.2

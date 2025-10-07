@@ -72,6 +72,7 @@ ViDubb is an advanced AI-powered video dubbing solution focused on delivering hi
    - [6) Download Wave2Lip Models](#6-download-wave2lip-models)
    - [7) Run the Project](#7-run-the-project)
    - [8) Launch the Gradio Web App](#8-launch-the-gradio-web-app)
+4. [One-Click + Subtitle Pipeline](#one-click--subtitle-pipeline)
 4. [Detailed Features and Technical Details](#detailed-features-and-technical-details)
    - [Speaker Diarization](#speaker-diarization)
    - [Lip-Sync (Optional)](#lip-sync-optional)
@@ -115,7 +116,7 @@ Our mission is to provide an efficient and high-quality AI-driven dubbing soluti
 
 ## TO DO LIST
 
-- [ ] Use subs if existed
+- [x] Use subs if existed
 - [ ] Implement sentence summarization.
 - [ ] Improve the Dynamic Lip-Sync Technology with a lot of speakers.
 - [ ] Deploy ViDubb on HuggingFace space
@@ -276,6 +277,59 @@ options:
 <p align="center"><img src="images/gradio app.jpeg" width="900" height="650" alt="Video dubbing">
 
 By following these steps, you should be able to set up and run ViDubb for video dubbing with AI-powered voice and lip synchronization.
+
+## One-Click + Subtitle Pipeline
+
+ViDubb now includes a streamlined experience for subtitle-first dubbing workflows.
+
+### Launch the one-click app
+
+- **Windows:** double-click `scripts\windows\oneclick.bat`.
+- **Linux/macOS:** run `bash scripts/linux/oneclick.sh`.
+
+Both launchers install missing Python packages, run a pre-flight hardware/model check, and open the minimal Gradio interface defined in `app.py`.
+
+Use the **Pre-flight check** button to confirm FFmpeg, CUDA visibility, `.env` tokens, and model checkpoints before you start. Toggle “Save run log” to archive the run under `logs/run_YYYYmmdd_HHMMSS.log`.
+
+### Subtitle-aware CLI examples
+
+Skip Whisper and reuse ready-made subtitles:
+
+```bash
+python inference.py \
+  --input_video in.mp4 \
+  --subs_file in.srt \
+  --source_language en \
+  --target_language pl \
+  --skip_translation_if_lang_matches \
+  --LipSync \
+  --Bg_sound \
+  --log
+```
+
+Extract embedded subtitles (stream 1) and translate to Polish:
+
+```bash
+python inference.py \
+  --input_video in.mkv \
+  --use_embedded_subs \
+  --preferred_subs_index 1 \
+  --target_language pl \
+  --LipSync \
+  --Bg_sound
+```
+
+Force STT even if subtitles are present:
+
+```bash
+python inference.py \
+  --input_video in.mp4 \
+  --force_stt \
+  --source_language en \
+  --target_language de
+```
+
+The CLI now accepts `--subs_file`, `--use_embedded_subs`, `--preferred_subs_index`, `--subs_lang`, `--skip_translation_if_lang_matches`, `--force_stt`, and `--log`, giving you full control over how subtitles participate in the dubbing pipeline.
 
 ---
 
