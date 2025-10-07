@@ -64,6 +64,7 @@ ViDubb is an advanced AI-powered video dubbing solution focused on delivering hi
 2. [TO DO List](#to-do-list)
 3. [ViDubb Installation and Usage Guide](#vidubb-installation-and-usage-guide)
    - [0) Install Anaconda](#0-install-anaconda)
+   - [Windows 11 + Python 3.10 one-click installer (with TensorFlow + Torch)](#windows-11--python-310-one-click-installer-with-tensorflow--torch)
    - [1) Set Up the Conda Environment](#1-set-up-the-conda-environment)
    - [2) Clone the Repository](#2-clone-the-repository)
    - [3) Configure the `.env` File](#3-configure-the-env-file)
@@ -129,6 +130,27 @@ Our mission is to provide an efficient and high-quality AI-driven dubbing soluti
 ## ViDubb Installation and Usage Guide
 
 ViDubb is an AI-powered video dubbing project that involves voice cloning, multilingual capabilities, lip-syncing, and background sound preservation. Follow the steps below to set up and run ViDubb.
+
+### Windows 11 + Python 3.10 one-click installer (with TensorFlow + Torch)
+
+Use the pip/venv bootstrap when running ViDub on Windows 11 with Python 3.10 and an RTX 3080. The helper scripts keep both PyTorch (CUDA builds) and TensorFlow available without relying on Conda.
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\activate
+powershell -ExecutionPolicy Bypass -File scripts\windows\bootstrap.ps1
+python app.py
+```
+
+`scripts/win/pick_env_matrix.py` creates a temporary sandbox to test three supported PyTorch CUDA triplets and locks the first one that passes smoke tests together with TensorFlow 2.10.1, NumPy < 2.0, and Numba 0.60.0. The solver tries them in this order:
+
+- **Set A (preferred):** torch 2.5.1 + cu121, torchvision 0.20.1 + cu121, torchaudio 2.5.1 + cu121.
+- **Set B:** torch 2.2.2 + cu118, torchvision 0.17.2 + cu118, torchaudio 2.2.2 + cu118.
+- **Set C:** torch 2.1.2 + cu121, torchvision 0.16.2 + cu121, torchaudio 2.1.2 + cu121.
+
+TensorFlow on Windows 11 is shipped as a CPU build after 2.10.1, which is the last release with official Windows wheels. The bootstrap keeps TensorFlow for components that require it while letting PyTorch drive GPU acceleration via CUDA. If you already have a supported PyTorch triplet installed, call the solver with `--prefer-existing-torch` to reuse it.
+
+
 
 ### 0) Install Anaconda
 Before starting, ensure you have [Anaconda](https://docs.anaconda.com/anaconda/install/) installed on your system. Anaconda is used to manage Python environments and dependencies.

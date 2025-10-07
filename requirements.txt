@@ -43,7 +43,8 @@ pynndescent==0.5.13
 tzlocal==5.3.1
 hangul_romanize==0.1.0
 ascii-magic==2.3.0
-tensorflow==2.8.0rc0
+# TensorFlow exact version is resolved by scripts/win/pick_env_matrix.py for Win/py310.
+# For manual install on Windows/py310, use: tensorflow==2.10.1
 jieba==0.42.1
 grpcio-status==1.33.2 
 scikit-image==0.23.2
@@ -52,6 +53,6 @@ gradio==5.8.0
 faster-whisper==1.1.1
 transformers==4.46.3
 librosa==0.10.2.post1
-pysubs2==1.7.3
+pysubs2>=1.8.0
 langdetect==1.0.9
 PyYAML==6.0.2
